@@ -23,7 +23,7 @@
       return {
         playerOptions: {
           // videojs and plugin options
-          height: '360',
+          height: '3601',
           sources: [{
             withCredentials: false,
             type: "application/x-mpegURL",
