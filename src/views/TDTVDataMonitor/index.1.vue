@@ -48,6 +48,7 @@
 import yheader from '@/components/header/header.vue'
 import BaseVideoPlayer from "@/components/base/baseVideoPlayer";
 import TVIMGCover from "../../../static/image/TVIMGCover.jpg";
+import adFullScreen from "../../../static/image/ad.jpeg";
 import adButtomImg from "../../../static/image/adButtom.png";
 export default {
     name: 'Live',
@@ -57,8 +58,8 @@ export default {
     },
     data() {
         return {
-            adFullScreen:'http://e.eqc100.com/data/attachment/haven_article/image/20180124/256263_20180124160459_55692.jpeg',
-            adButtomImg:'http://e.eqc100.com/data/attachment/haven_article/20180124/123107_0.jpeg',
+            adFullScreen:adFullScreen,
+            adButtomImg:adButtomImg,
             fullAdCount:1, //全屏广告倒计时,默认8秒
             adVideoCount:5, //视频广告倒计时,默认30秒
             adVideo:'http://113.96.155.123/youku/67744964C7739716F133C6753/03000801005C1C8C7A1B11C003E88028C6FD39-8628-439E-B5AE-EEFCBBF7F15F.mp4?sid=054649805389218928368_00_A7625f28606e1b96835070d012011b93a&sign=f5bf206dc517ba93d9498af9a176ff2d&ctype=50&hd=1&ali_redirect_domain=vali.cp31.ott.cibntv.net&ali_redirect_ex_ftag=2d4891c183baf1eb2a2fa7d16af3b17b61e4bbc6364af314&ali_redirect_ex_tmining_ts=1546498441&ali_redirect_ex_tmining_expire=3600&ali_redirect_ex_hot=11',
@@ -203,23 +204,23 @@ export default {
     left: 0px;
     top: 0px;
     transition: top .4s .1s;
-    img{
-        width:100%;
-        height:100vh;
-    }
-    .txt{
-        position: absolute;
-        z-index: 100000;
-        width: 120px;
-        height: 30px;
-        background-color: #333;
-        right: 10px;
-        top: 10px;
-        text-align: center;
-        line-height: 30px;
-        color: #FFF;
-        font-size: 16px;
-    }
+}
+.advertising img{
+    width:100%;
+    height:100vh;
+}
+.advertising .txt{
+    position: absolute;
+    z-index: 100000;
+    width: 120px;
+    height: 30px;
+    background-color: #333;
+    right: 10px;
+    top: 10px;
+    text-align: center;
+    line-height: 30px;
+    color: #FFF;
+    font-size: 16px;
 }
 .liveShow{
     background-image: url("../../../static/image/defaultbg.png");
@@ -229,57 +230,62 @@ export default {
     color:#fff;
     overflow: hidden;
     padding:0 10px;
-    .onShowPanel{
-        margin-top:18vh;
-        img{
-            width: 100%;
-            height: 155px;
-            border-radius:10px;
-        }
-        .h5video{
-            width: 100%;
-            height:25vh;
-        }
-        .videoPlayer{
-            display:none;
-        }
-    }
-    .picBox {
-        display: flex;
-        width:95vw;
-        img{
-            width: 90px;
-            height:55px;
-            border-radius:2px;
-        }
-    }
+}
+.liveShow .onShowPanel{
+    margin-top:18vh;
+    /* position:relative; */
+}
+.liveShow .onShowPanel .h5video{
+    width: 100%;
+    height:25vh;
+}
+.liveShow .onShowPanel .videoPlayer{
+    display:none;
+    /* position: absolute; */
+}
+.liveShow .onShowPanel img{
+    width: 100%;
+    height: 155px;
+    border-radius:10px;
+}
+.liveShow .picBox {
+    display: flex;
+    width:95vw;
+}
+.liveShow .picBox img{
+    width: 90px;
+    height:55px;
+    border-radius:2px;
+    
 }
 .adbuttom{
     position:absolute;
     bottom:0;
-    img{
-        width: 100vw;
-        height: 30vh;
-    }
 }
+// .onShowList{
+//     .title{
+//         text-align: left;
+//         margin-bottom: 4px;
+//     }
+// }
 .onShowList{
   position:absolute;
   top:48vh;
-    li{
-        border:1px solid #bbb6b6;
-        margin:0 3px;
-        width: 90px;
-        height: 54px;
-        background:#fff;
-        border-radius:4px;
-    }
-    .title{
-        text-align: left;
-        margin-bottom: 4px;
-    }
-    .picWrap{
-        width:100%;
-        overflow-x: auto;
-    }
+}
+.onShowList .title{
+    text-align: left;
+    margin-bottom: 4px;
+}
+.onShowList .picWrap{
+    width:100%;
+    overflow-x: auto;
+}
+.onShowList li{
+    border:1px solid #bbb6b6;
+    margin:0 3px;
+    width: 90px;
+    height: 54px;
+    background:#fff;
+    border-radius:4px;
 }
 </style>
