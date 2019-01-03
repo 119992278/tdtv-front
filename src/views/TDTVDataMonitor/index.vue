@@ -13,7 +13,7 @@
                 <div class='onShowPanel'>
                     <!-- 直播广告  -->
                    <video id='h5video' class='h5video' controls preload loop muted>
-                        <source :src="adVideo" type="video/mp4">
+                        <source :src="adVideoSource" type="video/mp4">
                         您的浏览器不支持 video 标签。
                     </video>
                     <!-- 直播频道 -->
@@ -38,7 +38,9 @@
                 </div>
             </div>
         </div>
+        <!-- 底部广告 -->
         <div class='adbuttom'>
+            <img class='dynamic' :src="adGifImg" alt="底部广告">
             <img :src="adButtomImg" alt="底部广告">
         </div>
     </div>
@@ -48,21 +50,22 @@
 import yheader from '@/components/header/header.vue'
 import BaseVideoPlayer from "@/components/base/baseVideoPlayer";
 import TVIMGCover from "../../../static/image/TVIMGCover.jpg";
-import adButtomImg from "../../../static/image/adButtom.png";
+import adResource from '@/lib/index.js'
 export default {
     name: 'Live',
     components: {
-            yheader,
-            BaseVideoPlayer,
+                yheader,
+                BaseVideoPlayer,
     },
     data() {
         return {
-            adFullScreen:'http://e.eqc100.com/data/attachment/haven_article/image/20180124/256263_20180124160459_55692.jpeg',
-            adButtomImg:'http://e.eqc100.com/data/attachment/haven_article/20180124/123107_0.jpeg',
-            fullAdCount:1, //全屏广告倒计时,默认8秒
-            adVideoCount:5, //视频广告倒计时,默认30秒
-            adVideo:'http://113.96.155.123/youku/67744964C7739716F133C6753/03000801005C1C8C7A1B11C003E88028C6FD39-8628-439E-B5AE-EEFCBBF7F15F.mp4?sid=054649805389218928368_00_A7625f28606e1b96835070d012011b93a&sign=f5bf206dc517ba93d9498af9a176ff2d&ctype=50&hd=1&ali_redirect_domain=vali.cp31.ott.cibntv.net&ali_redirect_ex_ftag=2d4891c183baf1eb2a2fa7d16af3b17b61e4bbc6364af314&ali_redirect_ex_tmining_ts=1546498441&ali_redirect_ex_tmining_expire=3600&ali_redirect_ex_hot=11',
+            fullAdCount:8, //全屏广告倒计时,默认8秒
+            adVideoCount:30, //视频广告倒计时,默认30秒
             imageUrl:'http://t.live.cntv.cn/imagehd/', // cctv地址
+            adFullScreen:adResource.fullScreenImg,
+            adVideoSource:adResource.videoSource,
+            adButtomImg:adResource.buttomImg,
+            adGifImg:adResource.gifImg,
             countTimer:null,
             playList: [
                 {
@@ -147,8 +150,17 @@ export default {
         //播放视频广告
         toPlayAdVideo(){
             console.log('播放视频广告')
+            let last = 0
             let h5video = document.getElementById("h5video");
             h5video.play()
+            h5video.ontimeupdate = function () { //禁止拖动滚动条
+                var current = h5video.currentTime;
+                if(current - last > 2) {
+                    h5video.currentTime = last;
+                } else {
+                last = current;
+                }
+            }
             this.countTimer = setInterval(()=> {
                 this.adVideoCount -- 
                 if(this.adVideoCount === 0){
@@ -260,6 +272,10 @@ export default {
     img{
         width: 100vw;
         height: 30vh;
+    }
+    .dynamic{
+        position: absolute;
+        height: 10vh;
     }
 }
 .onShowList{
