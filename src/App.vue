@@ -109,5 +109,8 @@ body{color: #000}
       text-align: center;
       margin-top: 8vh;
       font-size: 12px;
+      height:100%;
+      overflow: hidden;
 }
 </style>
+
